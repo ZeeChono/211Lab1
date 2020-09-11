@@ -31,6 +31,9 @@ public class Lab1 {
   public static final int INVALID_SAMPLE_LIMIT = 20;
   /** The poll sleep time, in milliseconds. */
   public static final int POLL_SLEEP_TIME = 50;
+  /** The fixed delta speed of the motor(deg/sec) */
+  public static final int DELTA_SPEED = 100;
+          
 
   // Hardware resources
 
@@ -47,7 +50,7 @@ public class Lab1 {
   private static int prevDistance;
   /** The number of invalid samples seen by filter() so far. */
   private static int invalidSampleCount;
-
+  
   // These arrays are used to avoid creating new ones at each iteration.
   /** Buffer (array) to store US samples. */
   private static float[] usData = new float[usSensor.sampleSize()];
@@ -55,10 +58,11 @@ public class Lab1 {
   private static int[] motorSpeeds = new int[2];
   
   /** The initial value of the error distance. */
-  // public static int distError = 0;
+  public static int distError = 0;
   
   private static final int LEFT = 0;
   private static final int RIGHT = 1;
+  
 
   /**
    * Main entry point.
@@ -114,6 +118,20 @@ public class Lab1 {
     
     // TODO Calculate the correct motor speeds and assign them to motorSpeeds like this
     
+    // if distance read exceeds the maximum value of sensor, return
+    
+    distError = distance - WALL_DIST;
+    
+    if(Math.abs(distError) <= WALL_DIST_ERR_THRESH) {
+      motorSpeeds[LEFT] = leftSpeed;
+      motorSpeeds[RIGHT] = rightSpeed;
+    }else if(distError > 0) {
+      motorSpeeds[LEFT] = leftSpeed + DELTA_SPEED;
+      motorSpeeds[RIGHT] = rightSpeed;
+    }else if(distError < 0) {
+      motorSpeeds[LEFT] = leftSpeed - DELTA_SPEED;
+      motorSpeeds[RIGHT] = rightSpeed;
+    }
     motorSpeeds[LEFT] = leftSpeed;
     motorSpeeds[RIGHT] = rightSpeed;
   }
