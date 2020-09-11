@@ -1,0 +1,72 @@
+#VRML_SIM R2020b utf8
+WorldInfo {
+  basicTimeStep 16
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "DPM-Tile"
+      material2 "Rubber"
+      coulombFriction [
+        1000
+      ]
+      bounce 0.1
+      softCFM 0.0001
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.07713746501906892 0.9946643735181783 0.06850252217343458 1.7564746419332764
+  position 1.1365874607880688 0.09663034915819102 0.14681638067513775
+}
+DPM-Floor {
+  dimension 4 4
+  wallHeight 0.3
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DPM-Robot {
+  hidden rotation_2 -0.00018302047523574273 0.9999999831884699 1.1250137495604894e-05 0.12278407932401068
+  translation 0.89 0.1 0.2
+  rotation 0 1 0 1.5708
+  children [
+    BallCaster {
+      translation 2.77165e-07 -0.04 0.04
+      rotation -1.2264404877024328e-06 0.7071072811860378 0.7071062811856401 -3.1415853071795863
+    }
+    EV3-Ultrasonic {
+      translation 0.064 0.023 -0.084
+      rotation -0.7071062811741513 0.707107281174549 5.830912318607353e-06 3.14159
+    }
+    EV3-LargeMotor {
+      name "A"
+      translation -0.055 -0.026 -0.021
+      rotation 1 0 0 -1.5707953071795862
+      children [
+        Wheel {
+          translation -0.02 0 0
+          rotation 0 0 1 -1.57
+        }
+      ]
+    }
+    EV3-LargeMotor {
+      name "B"
+      translation 0.055 -0.026 -0.021
+      rotation 1 0 0 -1.5707953071795862
+      children [
+        Wheel {
+          translation 0.02 0 0
+          rotation 0 0 1 1.57
+        }
+      ]
+    }
+    subassembly-solid {
+      translation 0 -0.013 -0.0315
+      rotation 1 0 0 -1.5707953071795862
+    }
+    EV3 {
+      rotation 1 0 0 -1.5708
+    }
+  ]
+}
