@@ -1,4 +1,4 @@
-Hello Lab_1
+Hello Lab
 
 # Lab 1 - Wall Follower
 
