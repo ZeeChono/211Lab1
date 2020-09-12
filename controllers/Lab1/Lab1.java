@@ -32,7 +32,7 @@ public class Lab1 {
   /** The poll sleep time, in milliseconds. */
   public static final int POLL_SLEEP_TIME = 50;
   /** The fixed delta speed of the motor(deg/sec) */
-  public static final int DELTA_SPEED = 100;
+  public static final int DELTA_SPEED = 200;
           
 
   // Hardware resources
@@ -121,19 +121,19 @@ public class Lab1 {
     // if distance read exceeds the maximum value of sensor, return
     
     distError = distance - WALL_DIST;
+    System.out.println(distError);
     
     if(Math.abs(distError) <= WALL_DIST_ERR_THRESH) {
       motorSpeeds[LEFT] = leftSpeed;
       motorSpeeds[RIGHT] = rightSpeed;
     }else if(distError > 0) {
       motorSpeeds[LEFT] = leftSpeed + DELTA_SPEED;
-      motorSpeeds[RIGHT] = rightSpeed;
+      motorSpeeds[RIGHT] = rightSpeed - DELTA_SPEED;
     }else if(distError < 0) {
       motorSpeeds[LEFT] = leftSpeed - DELTA_SPEED;
-      motorSpeeds[RIGHT] = rightSpeed;
+      motorSpeeds[RIGHT] = rightSpeed + DELTA_SPEED;
     }
-    motorSpeeds[LEFT] = leftSpeed;
-    motorSpeeds[RIGHT] = rightSpeed;
+   
   }
   
   /** Returns the filtered distance between the US sensor and an obstacle in cm. */
